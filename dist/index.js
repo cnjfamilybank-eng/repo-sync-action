@@ -883,7 +883,7 @@ class DecodedURL extends URL {
     };
     return makeCallback(0);
   };
-  
+
   var _isArray = Array.isArray || function(maybeArray){
     return Object.prototype.toString.call(maybeArray) === '[object Array]';
   };
@@ -39456,7 +39456,7 @@ module.exports = (str, filter = {}) => {
         filter = str || {};
         str = run();
     }
-    
+
     const {
         added,
         modified,
@@ -39465,9 +39465,9 @@ module.exports = (str, filter = {}) => {
         renamed,
         unstaged,
     } = filter;
-    
+
     const files = parse(str);
-    
+
     const picked = pick(files, {
         added,
         modified,
@@ -39476,9 +39476,9 @@ module.exports = (str, filter = {}) => {
         renamed,
         unstaged,
     });
-    
+
     const names = getNames(picked);
-    
+
     return names;
 };
 
@@ -39498,20 +39498,20 @@ function run() {
 module.exports.parse = parse;
 function parse(str) {
     const result = [];
-    
+
     const lines = str
         .split('\n')
         .filter(Boolean);
-    
+
     for (const line of lines) {
         const {name, mode} = parseLine(line);
-        
+
         result.push({
             name,
             mode,
         });
     }
-    
+
     return result;
 }
 
@@ -39523,28 +39523,28 @@ const ARROW = '-> ';
 const cutRenameTo = (line) => {
     const i = line.indexOf(ARROW);
     const count = i + ARROW.length;
-    
+
     return line.slice(count);
 };
 
 function parseLine(line) {
     const [first] = line;
-    
+
     if (first === UNTRACKED)
         return {
             name: line.replace('?? ', ''),
             mode: UNTRACKED,
         };
-    
+
     if (first === RENAMED)
         return {
             name: cutRenameTo(line),
             mode: RENAMED,
         };
-    
+
     const [mode] = line.match(/^[\sA-Z]+\s/, '');
     const name = line.replace(mode, '');
-    
+
     return {
         name,
         mode,
@@ -39560,25 +39560,25 @@ const isUnstaged = ({mode}) => mode === ' M ';
 
 const check = ({added, modified, untracked, unstaged, deleted, renamed}) => (file) => {
     let is = false;
-    
+
     if (added)
         is = is || isAdded(file);
-    
+
     if (modified)
         is = is || isModified(file);
-    
+
     if (untracked)
         is = is || isUntracked(file);
-    
+
     if (unstaged)
         is = is || isUnstaged(file);
-    
+
     if (deleted)
         is = is || isDeleted(file);
-    
+
     if (renamed)
         is = is || isRenamed(file);
-    
+
     return is;
 };
 
@@ -39778,7 +39778,7 @@ __webpack_unused_export__ = defaultContentType
 /************************************************************************/
 /******/ // The module cache
 /******/ var __webpack_module_cache__ = {};
-/******/ 
+/******/
 /******/ // The require function
 /******/ function __nccwpck_require__(moduleId) {
 /******/ 	// Check if module is in cache
@@ -39792,7 +39792,7 @@ __webpack_unused_export__ = defaultContentType
 /******/ 		// no module.loaded needed
 /******/ 		exports: {}
 /******/ 	};
-/******/ 
+/******/
 /******/ 	// Execute the module function
 /******/ 	var threw = true;
 /******/ 	try {
@@ -39801,11 +39801,11 @@ __webpack_unused_export__ = defaultContentType
 /******/ 	} finally {
 /******/ 		if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 	}
-/******/ 
+/******/
 /******/ 	// Return the exports of the module
 /******/ 	return module.exports;
 /******/ }
-/******/ 
+/******/
 /************************************************************************/
 /******/ /* webpack/runtime/define property getters */
 /******/ (() => {
@@ -39818,16 +39818,16 @@ __webpack_unused_export__ = defaultContentType
 /******/ 		}
 /******/ 	};
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/hasOwnProperty shorthand */
 /******/ (() => {
 /******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ })();
-/******/ 
+/******/
 /******/ /* webpack/runtime/compat */
-/******/ 
+/******/
 /******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 
@@ -40923,8 +40923,8 @@ class oidc_utils_OidcClient {
             const res = yield httpclient
                 .getJson(id_token_url)
                 .catch(error => {
-                throw new Error(`Failed to get ID Token. \n 
-        Error Code : ${error.statusCode}\n 
+                throw new Error(`Failed to get ID Token. \n
+        Error Code : ${error.statusCode}\n
         Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
@@ -52063,7 +52063,7 @@ class Git {
 
 			---
 
-			This PR was created automatically by the [repo-file-sync-action](https://github.com/BetaHuhn/repo-file-sync-action) workflow run [#${
+			This PR was created automatically by the [repo-sync-action](https://github.com/vaivars/repo-sync-action) workflow run [#${
 			process.env.GITHUB_RUN_ID || 0
 		}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID || 0})
 		`)
