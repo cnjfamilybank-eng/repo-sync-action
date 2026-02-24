@@ -1,7 +1,6 @@
 import * as core from '@actions/core'
 import { exec } from 'child_process'
 import fs from 'fs-extra'
-import readfiles from 'node-readfiles'
 import nunjucks from 'nunjucks'
 import * as path from 'path'
 
@@ -183,4 +182,28 @@ export function arrayEquals(array1, array2) {
 		&& array1.length === array2.length
 		&& array1.every((value, i) => value === array2[i])
 	)
+}
+
+// Custom readfiles implementation to replace node-readfiles
+export async function readfiles(dir, options = {}) {
+	const files = []
+	try {
+		const items = await fs.readdir(dir)
+		for (const item of items) {
+			const fullPath = path.join(dir, item)
+			const stat = await fs.stat(fullPath)
+			if (stat.isDirectory()) {
+				const subFiles = await readfiles(fullPath, options)
+				files.push(...subFiles.map((f) => path.join(item, f)))
+			} else {
+				files.push(item)
+			}
+		}
+	} catch (err) {
+		if (err.code === 'ENOENT') {
+			return []
+		}
+		throw err
+	}
+	return files
 }
