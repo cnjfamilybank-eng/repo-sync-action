@@ -48,6 +48,7 @@
     "@octokit/core": "^7.0.6",
     "@vercel/ncc": "^0.38.4",
     "eslint": "^10.0.2",
+    "esmock": "^2.7.3",
     "globals": "^17.3.0"
   }
 }

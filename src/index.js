@@ -1,3 +1,4 @@
+import { pathToFileURL } from 'url'
 import * as core from '@actions/core'
 import * as fs from 'fs'
 
@@ -31,7 +32,7 @@ const {
 	TEAM_REVIEWERS,
 } = config
 
-async function run() {
+export async function run() {
 	// Reuse octokit for each repo
 	const git = new Git()
 
@@ -271,7 +272,9 @@ async function run() {
 	core.info('Cleanup complete')
 }
 
-run().catch((err) => {
-	core.setFailed(err.message)
-	core.debug(err)
-})
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+	run().catch((err) => {
+		core.setFailed(err.message)
+		core.debug(err)
+	})
+}
