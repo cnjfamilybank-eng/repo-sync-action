@@ -653,3 +653,7 @@ This Action was inspired by:
 Copyright 2021 Maximilian Schiller
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Create "New repository secret":
+Name: APPSHEET_APP_ID | Value: (Your App ID)
+Name: APPSHEET_TABLE_NAME | Value: Ledger (or your table name)
+Name: APPSHEET_ACCESS_KEY | Value: (Your Access Key)
